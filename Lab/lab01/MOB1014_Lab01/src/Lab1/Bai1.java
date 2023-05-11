@@ -2,13 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Lab01;
+package Lab1;
 import java.util.Scanner;
 /**
  *
  * @author Quang
  */
-public class Bai01 {
+
+/*
+    Kiểu dữ liệu cơ bản:
+    -Số nguyên: int - %d
+    -Số thực: float - double | %f
+    -Ký tự: String - %s
+
+    Đặt tên biến:
+    -Camel (con lạc đà): HinhChuNhat
+    -Snake (con rắn): hinh_chu_nhat
+*/
+
+
+public class Bai1 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
@@ -21,11 +34,9 @@ public class Bai01 {
         System.out.print(name);
         System.out.print(" ");
         System.out.print( aveMark);
-        System.out.print(" diem");
-        System.out.println("");
+        System.out.print(" diem\n");
 
-        System.out.printf("%s %f diem",name,aveMark);
-        System.out.println("");
+        System.out.printf("%s %f diem\n",name,aveMark);
         
         System.out.println(name+" "+aveMark+" diem");
     }
