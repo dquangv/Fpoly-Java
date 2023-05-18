@@ -4,6 +4,17 @@ import java.util.Scanner;
 
 public class Bai4 {
 
+    public static void ImportStudent(int num, int array[]) {
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < num; i++) {
+            System.out.printf("Name of student %d: ", i + 1);
+            name[i] = sc.nextLine();
+            System.out.printf("Mark of studen %d: ", i + 1);
+            mark[i] = sc.nextFloat();
+            sc.nextLine();
+        }
+    }
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 

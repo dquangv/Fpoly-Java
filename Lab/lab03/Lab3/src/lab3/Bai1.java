@@ -4,13 +4,8 @@ import java.util.Scanner;
 
 public class Bai1 {
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
+    public static void prime(int num) {
         boolean check = true;
-
-        System.out.println("Enter a number to check:");
-        int num = sc.nextInt();
 
         if (num == 1) {
             System.out.println("This number is not prime");
@@ -25,5 +20,14 @@ public class Bai1 {
             String prime = check == true ? "This number is prime" : "This number is not prime";
             System.out.println(prime);
         }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter a number to check:");
+        int num = sc.nextInt();
+
+        prime(num);
     }
 }
