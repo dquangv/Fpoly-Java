@@ -1,24 +1,29 @@
 package lab3;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Bai4 {
 
-    public static void ImportStudent(int num, String[] name, float[] mark) {
+    public static void ImportStudent(int num, ArrayList<Object> student) {
         Scanner sc = new Scanner(System.in);
 
         for (int i = 0; i < num; i++) {
             System.out.printf("Name of student %d: ", i + 1);
-            name[i] = sc.nextLine();
+            student.add(sc.nextLine());
             System.out.printf("Mark of studen %d: ", i + 1);
-            mark[i] = sc.nextFloat();
+            student.add(sc.nextFloat());
             sc.nextLine();
         }
-    }
-
-    public static void UpdateAcademic(int num, String[] academic, float[] mark) {
+        
         for (int i = 0; i < num; i++) {
-            if (mark[i] < 5) {
+            System.out.println(student.toString());
+        }
+    }
+/*
+    public static void UpdateAcademic(int num, ArrayList<Object> student) {
+        for (int i = 0; i < num; i++) {
+            if (student.get(1).get(1) < 5) {
                 academic[i] = "Weak";
 
             } else if (mark[i] < 6.5) {
@@ -61,7 +66,7 @@ public class Bai4 {
             System.out.printf("Academic ability of student %d: %s\n\n", i + 1, academic[i]);
         }
     }
-
+*/
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -69,12 +74,11 @@ public class Bai4 {
         int num = sc.nextInt();
         sc.nextLine();
 
-        String[] name = new String[num], academic = new String[num];
-        float mark[] = new float[num];
+        ArrayList<Object> student = new ArrayList<>();
 
-        ImportStudent(num, name, mark);
+        ImportStudent(num, student);
 
-        System.out.println("");
+ /*       System.out.println("");
 
         UpdateAcademic(num, academic, mark);
 
@@ -83,5 +87,6 @@ public class Bai4 {
         System.out.println("List of students in ascending order of marks");
 
         ExportStudent(num, name, academic, mark);
+*/
     }
 }

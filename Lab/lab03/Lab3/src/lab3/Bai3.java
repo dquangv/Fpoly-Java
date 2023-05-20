@@ -1,32 +1,33 @@
 package lab3;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Bai3 {
 
-    public static void ImportArray(int num, int array[]) {
+    public static void ImportArrayList(int num, ArrayList<Integer> array) {
         Scanner sc = new Scanner(System.in);
 
         for (int i = 0; i < num; i++) {
             System.out.printf("Enter the number for element %d: ", i + 1);
-            array[i] = sc.nextInt();
+            array.add(sc.nextInt());
         }
     }
 
-    public static void ExportArray(int num, int array[]) {
+    public static void ExportArrayList(int num, ArrayList<Integer> array) {
         for (int i = 0; i < num; i++) {
-            System.out.println(array[i]);
+            array.get(i);
         }
     }
 
-    public static float AverageElement(int num, int array[]) {
+    public static float AverageElement(int num, ArrayList<Integer> array) {
         int count = 0, sum = 0;
 
         for (int i = 0; i < num; i++) {
-            if (array[i] % 3 == 0) {
+            if (array.get(i) % 3 == 0) {
                 count += 1;
-                sum += array[i];
+                sum += array.get(i);
             }
         }
 
@@ -39,15 +40,15 @@ public class Bai3 {
 
         System.out.print("Enter the number element of array: ");
         int num = sc.nextInt();
-        int array[] = new int[num];
+        ArrayList<Integer> array = new ArrayList(num);
 
-        ImportArray(num, array);
+        ImportArrayList(num, array);
 
-        Arrays.sort(array);
+        Collections.sort(array);
 
-        ExportArray(num, array);
+        ExportArrayList(num, array);
 
-        System.out.println("The minimun element of array is " + array[0]);
+        System.out.println("The minimun element of array is " + array.get(0));
 
         System.out.println("The average of elements divided by 3 in array is " + AverageElement(num, array));
     }
