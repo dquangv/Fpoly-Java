@@ -1,92 +1,101 @@
 package lab3;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Bai4 {
 
-    public static void ImportStudent(int num, ArrayList<Object> student) {
+    static class Student implements Comparable<Student> {
+
+        private String name;
+        private double mark;
+        private String academic;
+
+        public Student(String name, double mark) {
+
+            this.name = name;
+            this.mark = mark;
+            this.academic = calculateAcademic();
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public double getMark() {
+            return mark;
+        }
+
+        public String calculateAcademic() {
+            if (mark < 5) {
+                academic = "Weak";
+            } else if (mark < 6.5) {
+                academic = "Average";
+            } else if (mark < 7.5) {
+                academic = "Pretty";
+            } else if (mark < 9) {
+                academic = "Good";
+            } else {
+                academic = "Excellent";
+            }
+            return academic;
+        }
+
+        @Override
+        public int compareTo(Student other) {
+            return Double.compare(this.mark,other.mark);
+        }
+    }
+
+    public ArrayList<Student> ImportStudent(int num) {
         Scanner sc = new Scanner(System.in);
+        ArrayList<Student> students = new ArrayList<>();
 
         for (int i = 0; i < num; i++) {
             System.out.printf("Name of student %d: ", i + 1);
-            student.add(sc.nextLine());
+            String name = sc.nextLine();
             System.out.printf("Mark of studen %d: ", i + 1);
-            student.add(sc.nextFloat());
+            double mark = sc.nextDouble();
             sc.nextLine();
+
+            Student student = new Student(name, mark);
+            students.add(student);
         }
-        
-        for (int i = 0; i < num; i++) {
-            System.out.println(student.toString());
-        }
+
+        return students;
     }
-/*
-    public static void UpdateAcademic(int num, ArrayList<Object> student) {
-        for (int i = 0; i < num; i++) {
-            if (student.get(1).get(1) < 5) {
-                academic[i] = "Weak";
-
-            } else if (mark[i] < 6.5) {
-                academic[i] = "Average";
-            } else if (mark[i] < 7.5) {
-                academic[i] = "Pretty";
-            } else if (mark[i] < 9) {
-                academic[i] = "Good";
-            } else {
-                academic[i] = "Excellent";
-            }
-
-        }
+    
+    public static void sortStudent(ArrayList<Student> students) {
+        Collections.sort(students);
     }
-
-    public static void ArrangeStudent(int num, String[] name, String[] academic, float[] mark) {
-        for (int i = 0; i < num - 1; i++) {
-            for (int j = i + 1; j < num; j++) {
-                if (mark[i] > mark[j]) {
-                    String tempName = name[i];
-                    name[i] = name[j];
-                    name[j] = tempName;
-
-                    float tempMark = mark[i];
-                    mark[i] = mark[j];
-                    mark[j] = tempMark;
-
-                    String tempAcademic = academic[i];
-                    academic[i] = academic[j];
-                    academic[j] = tempAcademic;
-                }
-            }
-        }
-    }
-
-    public static void ExportStudent(int num, String[] name, String[] academic, float[] mark) {
-        for (int i = 0; i < num; i++) {
-            System.out.printf("Name of student %d: %s\n", i + 1, name[i]);
-            System.out.printf("Mark of student %d: %.2f\n", i + 1, mark[i]);
-            System.out.printf("Academic ability of student %d: %s\n\n", i + 1, academic[i]);
-        }
-    }
-*/
-    public static void main(String[] args) {
+    
+    public void ExportStudent() {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Enter the number of student: ");
         int num = sc.nextInt();
         sc.nextLine();
 
-        ArrayList<Object> student = new ArrayList<>();
+        ArrayList<Student> students = ImportStudent(num);
 
-        ImportStudent(num, student);
+        sortStudent(students);
+        
+        for (int i = 0; i < num; i++) {
+            System.out.println("Studen "+(i+1));
+            System.out.println("Name: "+students.get(i).getName());
+            System.out.println("Mark: "+students.get(i).getMark());
+            System.out.println("Academic: "+students.get(i).calculateAcademic());
+        }
+    }
+    
+    
 
- /*       System.out.println("");
 
-        UpdateAcademic(num, academic, mark);
+    public static void main(String[] args) {
+       
+        Bai4 student = new Bai4();
+        student.ExportStudent();
 
-        ArrangeStudent(num, name, academic, mark);
-
-        System.out.println("List of students in ascending order of marks");
-
-        ExportStudent(num, name, academic, mark);
-*/
     }
 }
