@@ -23,40 +23,45 @@ public class Asm {
             System.out.println("*\t 10. \tKet thuc chuong trinh\t\t\t\t\t\t*");
             System.out.println("*-------------------------------------------------------------------------------*");
 
-            System.out.print("Chon chuc nang: ");
-            int choice = sc.nextInt();
+            try {
+                System.out.print("Chon chuc nang: ");
+                int choice = Integer.parseInt(sc.nextLine());
 
-            switch (choice) {
-                case 1:
-                    System.out.println("NHAP DANH SACH NHAN VIEN TU BAN PHIM");
-                    break;
-                case 2:
-                    System.out.println("XUAT DANH SACH NHAN VIEN RA MAN HINH");
-                    break;
-                case 3:
-                    System.out.println("TIM VA HIEN THI NHAN VIEN THEO MA NHAP TU BAN PHIM");
-                    break;
-                case 4:
-                    System.out.println("XOA NHAN VIEN THEO MA NHAP TU BAN PHIM");
-                    break;
-                case 5:
-                    System.out.println("CAP NHAT THONG TIN NHAN VIEN THEO MA NHAP TU BAN PHIM");
-                    break;
-                case 6:
-                    System.out.println("TIM CAC NHAN VIEN THEO KHOANG LUONG NHAP TU BAN PHIM");
-                    break;
-                case 7:
-                    System.out.println("SAP XEP NHAN VIEN THEO HO VA TEN");
-                    break;
-                case 8:
-                    System.out.println("SAP XEP NHAN VIEN THEO THU NHAP");
-                    break;
-                case 9:
-                    System.out.println("XUAT 5 NHAN VIEN CO THU NHAP CAO NHAT");
-                    break;
-                default:
-                    System.out.println("Cam on da su dung dich vu!");
-                    System.exit(0);
+                switch (choice) {
+                    case 1:
+                        System.out.println("NHAP DANH SACH NHAN VIEN TU BAN PHIM");
+                        break;
+                    case 2:
+                        System.out.println("XUAT DANH SACH NHAN VIEN RA MAN HINH");
+                        break;
+                    case 3:
+                        System.out.println("TIM VA HIEN THI NHAN VIEN THEO MA NHAP TU BAN PHIM");
+                        break;
+                    case 4:
+                        System.out.println("XOA NHAN VIEN THEO MA NHAP TU BAN PHIM");
+                        break;
+                    case 5:
+                        System.out.println("CAP NHAT THONG TIN NHAN VIEN THEO MA NHAP TU BAN PHIM");
+                        break;
+                    case 6:
+                        System.out.println("TIM CAC NHAN VIEN THEO KHOANG LUONG NHAP TU BAN PHIM");
+                        break;
+                    case 7:
+                        System.out.println("SAP XEP NHAN VIEN THEO HO VA TEN");
+                        break;
+                    case 8:
+                        System.out.println("SAP XEP NHAN VIEN THEO THU NHAP");
+                        break;
+                    case 9:
+                        System.out.println("XUAT 5 NHAN VIEN CO THU NHAP CAO NHAT");
+                        break;
+                    default:
+                        System.out.println("Cam on da su dung dich vu!");
+                        System.exit(0);
+                }
+            } catch (Exception e) {
+                System.out.println("nhap so tu 1 den 10 dum cai!");
+
             }
         } while (true);
     }
