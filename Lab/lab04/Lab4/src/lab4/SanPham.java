@@ -16,7 +16,7 @@ public class SanPham {
         this.donGia = donGia;
     }
 
-    private double getThueNhapKhau() {
+    public double getThueNhapKhau() {
         return this.donGia * 0.1;
     }
 
