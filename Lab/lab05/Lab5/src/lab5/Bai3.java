@@ -139,6 +139,9 @@ public class Bai3 {
                    break;
                 case 4:
                     System.out.println("Gia trung binh cua cac san pham: "+ds.tinhGiaTrungBinh());
+                    break;
+                case 5:
+                    break;
                 default:
                     System.exit(0);
             }
