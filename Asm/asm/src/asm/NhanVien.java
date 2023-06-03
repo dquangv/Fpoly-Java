@@ -1,8 +1,78 @@
 package asm;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Asm {
+public class NhanVien {
+
+    Scanner sc = new Scanner(System.in);
+    public String maNV, hoTen;
+    public double luong;
+
+    public double getThueTN() {
+        if (luong < 9000) {
+            return 0;
+        } else if (luong <= 15000000) {
+            return luong * 0.1;
+        } else {
+            return luong * 0.12;
+        }
+    }
+
+    public String getMaNV() {
+        return maNV;
+    }
+
+    public void setMaNV(String maNV) {
+        this.maNV = maNV;
+    }
+
+    public String getHoTen() {
+        return hoTen;
+    }
+
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
+    }
+
+    public double getThuNhap() {
+        return luong;
+    }
+
+    public void setThuNhap(double luong) {
+        this.luong = luong;
+    }
+
+    public void nhapThongTin(ArrayList<NhanVien> dsNV) {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            NhanVien nhanVien = new NhanVien();
+
+            System.out.print("Ma nhan vien: ");
+            nhanVien.setMaNV(sc.nextLine());
+            System.out.print("Ho ten: ");
+            nhanVien.setHoTen(sc.nextLine());
+            System.out.print("Thu nhap: ");
+            nhanVien.setThuNhap(Double.parseDouble(sc.nextLine()));
+
+            dsNV.add(nhanVien);
+            
+            System.out.print("Nhap nua hong? (Y/N): ");
+            String check = sc.nextLine();
+            if (check.equalsIgnoreCase("No") || check.equalsIgnoreCase("N")) {
+                break;
+            }
+        }
+    }
+    
+    public void xuatThongTin(ArrayList<NhanVien> dsNV) {
+        for (int i = 0; i < dsNV.size(); i++) {
+            System.out.println("\nMa nhan vien: "+dsNV.get(i).getMaNV());
+            System.out.println("Ho ten: "+dsNV.get(i).getHoTen());
+            System.out.println("Luong: "+dsNV.get(i).getThuNhap());
+            System.out.println("Thue thu nhap: "+dsNV.get(i).getThueTN());
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -55,8 +125,10 @@ public class Asm {
                     case 9:
                         System.out.println("XUAT 5 NHAN VIEN CO THU NHAP CAO NHAT");
                         break;
-                    default:
+                    case 10:
                         System.out.println("Cam on da su dung dich vu!");
+                    default:
+                        System.out.println("Nhap dung dum cai ma!");
                         System.exit(0);
                 }
             } catch (Exception e) {
