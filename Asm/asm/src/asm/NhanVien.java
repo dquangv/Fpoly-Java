@@ -117,34 +117,63 @@ public class NhanVien {
 
     public static void xoaThongTin(ArrayList<NhanVien> dsNV) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> dsTenXoa = new ArrayList<>();
+        ArrayList<NhanVien> dsXoa = new ArrayList<>();
         System.out.println("XOA NHAN VIEN THEO MA NHAP TU BAN PHIM");
+
         while (true) {
             System.out.print("Nhap thong tin nhan vien ban muon xoa: ");
             String thongTinXoa = sc.nextLine();
 
-            dsTenXoa.add(thongTinXoa);
+            // Find the matching employees and add them to the delete list
+            for (NhanVien nv : dsNV) {
+                if (nv.getMaNV().equalsIgnoreCase(thongTinXoa) || nv.getHoTen().equalsIgnoreCase(thongTinXoa) || String.format("%.0f", nv.getThuNhap()).equalsIgnoreCase(thongTinXoa)) {
+                    dsXoa.add(nv);
+                }
+            }
+
             System.out.print("Muon xoa them hong? (Y/N): ");
             String check = sc.nextLine();
             if (check.equalsIgnoreCase("No") || check.equalsIgnoreCase("N")) {
                 break;
             }
         }
-        for (int i = 0; i < dsNV.size(); i++) {
-            for (int j = 0; i < dsTenXoa.size(); j++) {
-                if (dsNV.get(i).getMaNV().equalsIgnoreCase(dsTenXoa.get(j)) || dsNV.get(i).getHoTen().equalsIgnoreCase(dsTenXoa.get(j)) || String.format("%.0f", dsNV.get(i).getThuNhap()).equalsIgnoreCase(dsTenXoa.get(j))) {
-                    dsNV.removeAll(dsTenXoa);
-                }
 
-            }
-        }
+        // Remove the employees from the delete list
+        dsNV.removeAll(dsXoa);
 
         System.out.println("Danh sach sau khi xoa");
-        for (int i = 0; i < dsNV.size(); i++) {
-            System.out.println("\nMa nhan vien: " + dsNV.get(i).getMaNV());
-            System.out.println("Ho ten: " + dsNV.get(i).getHoTen());
-            System.out.println("Luong: " + dsNV.get(i).getThuNhap());
-            System.out.println("Thue thu nhap: " + dsNV.get(i).getThueTN());
+        for (NhanVien nv : dsNV) {
+            System.out.println("\nMa nhan vien: " + nv.getMaNV());
+            System.out.println("Ho ten: " + nv.getHoTen());
+            System.out.println("Luong: " + nv.getThuNhap());
+            System.out.println("Thue thu nhap: " + nv.getThueTN());
+        }
+    }
+    
+    public static void capNhatThongTin(ArrayList<NhanVien> dsNV) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap ten nhan vien ban muon cap nhat thong tin: ");
+        String nameCheck = sc.nextLine();
+        
+        for (NhanVien nv : dsNV) {
+            if (nv.getHoTen().equalsIgnoreCase(nameCheck)) {
+                System.out.println("Nhap thong tin ban muon cap nhat (ma, ho ten, luong): ");
+                String infoCheck = sc.nextLine();
+                if (infoCheck.equalsIgnoreCase("ma")) {
+                    System.out.print("Ma nhan vien sau khi chinh sua: ");
+                    nv.setMaNV(sc.nextLine());
+                } else if (infoCheck.equalsIgnoreCase("ho ten") || infoCheck.equalsIgnoreCase("ten")) {
+                    System.out.println("Ten nhan vien sau khi chinh sua: ");
+                    nv.setHoTen(sc.nextLine());
+                } else if (infoCheck.equalsIgnoreCase("luong") ) {
+                    System.out.println("Luong nhan vien sau khi chinh sua: ");
+                    nv.setThuNhap(sc.nextDouble());
+                } else {
+                    System.out.println("Noi dung ban nhap khong duoc tim thay");
+                }
+            } else {
+                System.out.println("Khong tim thay ten nhan vien nay");
+            }
         }
     }
 
