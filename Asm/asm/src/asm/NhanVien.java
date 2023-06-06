@@ -1,9 +1,11 @@
 package asm;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
-public class NhanVien {
+public class NhanVien implements Comparator<NhanVien> {
 
     Scanner sc = new Scanner(System.in);
     public String maNV, hoTen;
@@ -149,31 +151,100 @@ public class NhanVien {
             System.out.println("Thue thu nhap: " + nv.getThueTN());
         }
     }
-    
+
     public static void capNhatThongTin(ArrayList<NhanVien> dsNV) {
+        System.out.println("CAP NHAT THONG TIN NHAN VIEN THEO MA NHAP TU BAN PHIM");
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap ten nhan vien ban muon cap nhat thong tin: ");
         String nameCheck = sc.nextLine();
-        
+
+        boolean found = false;
+
         for (NhanVien nv : dsNV) {
             if (nv.getHoTen().equalsIgnoreCase(nameCheck)) {
-                System.out.println("Nhap thong tin ban muon cap nhat (ma, ho ten, luong): ");
+                found = true;
+                System.out.print("Nhap thong tin ban muon cap nhat (ma, ho ten, luong): ");
                 String infoCheck = sc.nextLine();
-                if (infoCheck.equalsIgnoreCase("ma")) {
-                    System.out.print("Ma nhan vien sau khi chinh sua: ");
-                    nv.setMaNV(sc.nextLine());
-                } else if (infoCheck.equalsIgnoreCase("ho ten") || infoCheck.equalsIgnoreCase("ten")) {
-                    System.out.println("Ten nhan vien sau khi chinh sua: ");
-                    nv.setHoTen(sc.nextLine());
-                } else if (infoCheck.equalsIgnoreCase("luong") ) {
-                    System.out.println("Luong nhan vien sau khi chinh sua: ");
-                    nv.setThuNhap(sc.nextDouble());
-                } else {
-                    System.out.println("Noi dung ban nhap khong duoc tim thay");
+
+                switch (infoCheck) {
+                    case "ma":
+                        System.out.print("Nhap ma nhan vien moi: ");
+                        nv.setMaNV(sc.nextLine());
+                        break;
+                    case "ho ten":
+                        System.out.println("Nhap ho ten moi: ");
+                        nv.setHoTen(sc.nextLine());
+                        break;
+                    case "luong":
+                        System.out.println("Nhap thu nhap moi: ");
+                        nv.setThuNhap(Double.parseDouble(sc.nextLine()));
+                        break;
+                    default:
+                        System.out.println("Muc thong tin khong hop le");
+                        break;
                 }
-            } else {
-                System.out.println("Khong tim thay ten nhan vien nay");
             }
+        }
+
+        if (!found) {
+            System.out.println("Khong tim thay nhan vien co ten: " + nameCheck);
+        } else {
+            System.out.println("Danh sach sau khi cap nhat");
+            for (NhanVien nvCN : dsNV) {
+                System.out.println("\nMa nhan vien: " + nvCN.getMaNV());
+                System.out.println("Ho ten: " + nvCN.getHoTen());
+                System.out.println("Luong: " + nvCN.getThuNhap());
+                System.out.println("Thue thu nhap: " + nvCN.getThueTN());
+            }
+        }
+    }
+
+    public static void timLuong(ArrayList<NhanVien> dsNV) {
+        System.out.println("TIM CAC NHAN VIEN THEO KHOANG LUONG NHAP TU BAN PHIM");
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Nhap khoang luong ma ban muon tim: ");
+        String khoangLuong = sc.nextLine();
+
+        String[] mocLuong = khoangLuong.split(" ");
+
+        ArrayList<NhanVien> nvLuong = new ArrayList<>();
+
+        int check = 0;
+
+        for (int i = 0; i < dsNV.size(); i++) {
+            if (dsNV.get(i).getThuNhap() > Double.parseDouble(mocLuong[0]) && dsNV.get(i).getThuNhap() < Double.parseDouble(mocLuong[1])) {
+                nvLuong.add(dsNV.get(i));
+                check++;
+            }
+        }
+
+        if (check == 0) {
+            System.out.printf("Khong co nhan vien nao co muc luong trong khoang %s den %s", mocLuong[0], mocLuong[1]);
+        } else {
+            for (NhanVien nv : nvLuong) {
+                System.out.println("\nMa nhan vien: " + nv.getMaNV());
+                System.out.println("Ho ten: " + nv.getHoTen());
+                System.out.println("Luong: " + nv.getThuNhap());
+                System.out.println("Thue thu nhap: " + nv.getThueTN());
+            }
+        }
+    }
+
+    @Override
+    public int compare(NhanVien o1, NhanVien o2) {
+        return o1.getHoTen().compareTo(o2.getHoTen());
+    }
+
+    public static void sapXepTen(ArrayList<NhanVien> dsNV) {
+        System.out.println("SAP XEP NHAN VIEN THEO HO VA TEN");
+        Collections.sort(dsNV, new NhanVien());
+        System.out.println("Danh sach nhan vien sau khi sap xep theo ten");
+        for (NhanVien nv : dsNV) {
+            System.out.println("\nMa nhan vien: " + nv.getMaNV());
+            System.out.println("Ho ten: " + nv.getHoTen());
+            System.out.println("Luong: " + nv.getThuNhap());
+            System.out.println("Thue thu nhap: " + nv.getThueTN());
         }
     }
 
@@ -201,13 +272,13 @@ public class NhanVien {
                         xoaThongTin(dsNV);
                         break;
                     case 5:
-                        System.out.println("CAP NHAT THONG TIN NHAN VIEN THEO MA NHAP TU BAN PHIM");
+                        capNhatThongTin(dsNV);
                         break;
                     case 6:
-                        System.out.println("TIM CAC NHAN VIEN THEO KHOANG LUONG NHAP TU BAN PHIM");
+                        timLuong(dsNV);
                         break;
                     case 7:
-                        System.out.println("SAP XEP NHAN VIEN THEO HO VA TEN");
+                        sapXepTen(dsNV);
                         break;
                     case 8:
                         System.out.println("SAP XEP NHAN VIEN THEO THU NHAP");
