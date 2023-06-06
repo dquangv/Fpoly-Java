@@ -1,5 +1,6 @@
 package asm;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,16 +10,22 @@ public class NhanVien implements Comparator<NhanVien> {
 
     Scanner sc = new Scanner(System.in);
     public String maNV, hoTen;
-    public double luong;
+    public BigDecimal luong;
 
-    public double getThueTN() {
-        if (luong < 9000) {
-            return 0;
-        } else if (luong <= 15000000) {
-            return luong * 0.1;
+    public BigDecimal getThueTN() {
+        BigDecimal thueTN;
+        BigDecimal luong9000000 = new BigDecimal("9000000");
+        BigDecimal luong15000000 = new BigDecimal("15000000");
+
+        if (luong.compareTo(luong9000000) < 0) {
+            thueTN = BigDecimal.ZERO;
+        } else if (luong.compareTo(luong15000000) <= 0) {
+            thueTN = luong.multiply(new BigDecimal("0.1"));
         } else {
-            return luong * 0.12;
+            thueTN = luong.multiply(new BigDecimal("0.12"));
         }
+
+        return thueTN;
     }
 
     public String getMaNV() {
@@ -37,11 +44,11 @@ public class NhanVien implements Comparator<NhanVien> {
         this.hoTen = hoTen;
     }
 
-    public double getThuNhap() {
+    public BigDecimal getThuNhap() {
         return luong;
     }
 
-    public void setThuNhap(double luong) {
+    public void setThuNhap(BigDecimal luong) {
         this.luong = luong;
     }
 
@@ -62,7 +69,6 @@ public class NhanVien implements Comparator<NhanVien> {
     }
 
     public static void nhapThongTin(ArrayList<NhanVien> dsNV) {
-        System.out.println("NHAP DANH SACH NHAN VIEN TU BAN PHIM");
         Scanner sc = new Scanner(System.in);
         while (true) {
             NhanVien nhanVien = new NhanVien();
@@ -72,7 +78,7 @@ public class NhanVien implements Comparator<NhanVien> {
             System.out.print("Ho ten: ");
             nhanVien.setHoTen(sc.nextLine());
             System.out.print("Thu nhap: ");
-            nhanVien.setThuNhap(Double.parseDouble(sc.nextLine()));
+            nhanVien.setThuNhap(new BigDecimal(sc.nextLine()));
 
             dsNV.add(nhanVien);
 
@@ -85,7 +91,7 @@ public class NhanVien implements Comparator<NhanVien> {
     }
 
     public static void xuatThongTin(ArrayList<NhanVien> dsNV) {
-        System.out.println("XUAT DANH SACH NHAN VIEN RA MAN HINH");
+
         for (int i = 0; i < dsNV.size(); i++) {
             System.out.println("\nMa nhan vien: " + dsNV.get(i).getMaNV());
             System.out.println("Ho ten: " + dsNV.get(i).getHoTen());
@@ -96,7 +102,6 @@ public class NhanVien implements Comparator<NhanVien> {
 
     public static void timThongTin(ArrayList<NhanVien> dsNV) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("TIM VA HIEN THI NHAN VIEN THEO THONG TIN NHAP TU BAN PHIM");
 
         System.out.print("Nhap thong tin nhan vien ban muon tim: ");
         String thongTin = sc.nextLine();
@@ -112,7 +117,7 @@ public class NhanVien implements Comparator<NhanVien> {
             }
         }
 
-        if (countCheck != 0) {
+        if (countCheck == 0) {
             System.out.println("Khong tim thay thong tin nhan vien thoa du lieu da nhap");
         }
     }
@@ -120,7 +125,6 @@ public class NhanVien implements Comparator<NhanVien> {
     public static void xoaThongTin(ArrayList<NhanVien> dsNV) {
         Scanner sc = new Scanner(System.in);
         ArrayList<NhanVien> dsXoa = new ArrayList<>();
-        System.out.println("XOA NHAN VIEN THEO MA NHAP TU BAN PHIM");
 
         while (true) {
             System.out.print("Nhap thong tin nhan vien ban muon xoa: ");
@@ -144,16 +148,10 @@ public class NhanVien implements Comparator<NhanVien> {
         dsNV.removeAll(dsXoa);
 
         System.out.println("Danh sach sau khi xoa");
-        for (NhanVien nv : dsNV) {
-            System.out.println("\nMa nhan vien: " + nv.getMaNV());
-            System.out.println("Ho ten: " + nv.getHoTen());
-            System.out.println("Luong: " + nv.getThuNhap());
-            System.out.println("Thue thu nhap: " + nv.getThueTN());
-        }
+        xuatThongTin(dsNV);
     }
 
     public static void capNhatThongTin(ArrayList<NhanVien> dsNV) {
-        System.out.println("CAP NHAT THONG TIN NHAN VIEN THEO MA NHAP TU BAN PHIM");
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap ten nhan vien ban muon cap nhat thong tin: ");
         String nameCheck = sc.nextLine();
@@ -177,7 +175,7 @@ public class NhanVien implements Comparator<NhanVien> {
                         break;
                     case "luong":
                         System.out.println("Nhap thu nhap moi: ");
-                        nv.setThuNhap(Double.parseDouble(sc.nextLine()));
+                        nv.setThuNhap(new BigDecimal(sc.nextLine()));
                         break;
                     default:
                         System.out.println("Muc thong tin khong hop le");
@@ -190,30 +188,26 @@ public class NhanVien implements Comparator<NhanVien> {
             System.out.println("Khong tim thay nhan vien co ten: " + nameCheck);
         } else {
             System.out.println("Danh sach sau khi cap nhat");
-            for (NhanVien nvCN : dsNV) {
-                System.out.println("\nMa nhan vien: " + nvCN.getMaNV());
-                System.out.println("Ho ten: " + nvCN.getHoTen());
-                System.out.println("Luong: " + nvCN.getThuNhap());
-                System.out.println("Thue thu nhap: " + nvCN.getThueTN());
-            }
+            xuatThongTin(dsNV);
         }
     }
 
     public static void timLuong(ArrayList<NhanVien> dsNV) {
-        System.out.println("TIM CAC NHAN VIEN THEO KHOANG LUONG NHAP TU BAN PHIM");
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Nhap khoang luong ma ban muon tim: ");
-        String khoangLuong = sc.nextLine();
+        BigDecimal khoangLuong = new BigDecimal(sc.nextLine());
 
-        String[] mocLuong = khoangLuong.split(" ");
-
+        String[] mocLuong = khoangLuong.toString().split("\\.");
+        
+        System.out.println(mocLuong[0]);
+        System.out.println(mocLuong[1]);
         ArrayList<NhanVien> nvLuong = new ArrayList<>();
 
         int check = 0;
 
         for (int i = 0; i < dsNV.size(); i++) {
-            if (dsNV.get(i).getThuNhap() > Double.parseDouble(mocLuong[0]) && dsNV.get(i).getThuNhap() < Double.parseDouble(mocLuong[1])) {
+            if (dsNV.get(i).getThuNhap().compareTo(new BigDecimal(mocLuong[0].trim())) >= 0 && dsNV.get(i).getThuNhap().compareTo(new BigDecimal(mocLuong[1].trim())) <= 0) {
                 nvLuong.add(dsNV.get(i));
                 check++;
             }
@@ -237,14 +231,31 @@ public class NhanVien implements Comparator<NhanVien> {
     }
 
     public static void sapXepTen(ArrayList<NhanVien> dsNV) {
-        System.out.println("SAP XEP NHAN VIEN THEO HO VA TEN");
         Collections.sort(dsNV, new NhanVien());
         System.out.println("Danh sach nhan vien sau khi sap xep theo ten");
-        for (NhanVien nv : dsNV) {
-            System.out.println("\nMa nhan vien: " + nv.getMaNV());
-            System.out.println("Ho ten: " + nv.getHoTen());
-            System.out.println("Luong: " + nv.getThuNhap());
-            System.out.println("Thue thu nhap: " + nv.getThueTN());
+        xuatThongTin(dsNV);
+    }
+
+    public static void sapXepLuong(ArrayList<NhanVien> dsNV) {
+        Collections.sort(dsNV, new Comparator<NhanVien>() {
+            @Override
+            public int compare(NhanVien o1, NhanVien o2) {
+                return o1.getThuNhap().compareTo(o2.getThuNhap());
+            }
+        });
+
+        System.out.println("Danh sach nhan vien sau khi sap xep theo thu nhap");
+        xuatThongTin(dsNV);
+    }
+
+    public static void topLuong(ArrayList<NhanVien> dsNV) {
+        sapXepLuong(dsNV);
+        Collections.reverse(dsNV);
+        for (int i = 0; i < 5; i++) {
+            System.out.println("\nMa nhan vien: " + dsNV.get(i).getMaNV());
+            System.out.println("Ho ten: " + dsNV.get(i).getHoTen());
+            System.out.println("Luong: " + dsNV.get(i).getThuNhap());
+            System.out.println("Thue thu nhap: " + dsNV.get(i).getThueTN());
         }
     }
 
@@ -260,31 +271,40 @@ public class NhanVien implements Comparator<NhanVien> {
 
                 switch (choice) {
                     case 1:
+                        System.out.println("NHAP DANH SACH NHAN VIEN TU BAN PHIM");
                         nhapThongTin(dsNV);
                         break;
                     case 2:
+                        System.out.println("XUAT DANH SACH NHAN VIEN RA MAN HINH");
                         xuatThongTin(dsNV);
                         break;
                     case 3:
+                        System.out.println("TIM VA HIEN THI NHAN VIEN THEO THONG TIN NHAP TU BAN PHIM");
                         timThongTin(dsNV);
                         break;
                     case 4:
+                        System.out.println("XOA NHAN VIEN THEO MA NHAP TU BAN PHIM");
                         xoaThongTin(dsNV);
                         break;
                     case 5:
+                        System.out.println("CAP NHAT THONG TIN NHAN VIEN THEO MA NHAP TU BAN PHIM");
                         capNhatThongTin(dsNV);
                         break;
                     case 6:
+                        System.out.println("TIM CAC NHAN VIEN THEO KHOANG LUONG NHAP TU BAN PHIM");
                         timLuong(dsNV);
                         break;
                     case 7:
+                        System.out.println("SAP XEP NHAN VIEN THEO HO VA TEN");
                         sapXepTen(dsNV);
                         break;
                     case 8:
                         System.out.println("SAP XEP NHAN VIEN THEO THU NHAP");
+                        sapXepLuong(dsNV);
                         break;
                     case 9:
                         System.out.println("XUAT 5 NHAN VIEN CO THU NHAP CAO NHAT");
+                        topLuong(dsNV);
                         break;
                     case 10:
                         System.out.println("Cam on da su dung dich vu!");
