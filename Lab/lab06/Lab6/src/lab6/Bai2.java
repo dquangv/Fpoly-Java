@@ -73,8 +73,10 @@ public class Bai2 {
         }
 
         public void locDSSP() {
+            System.out.print("Ten hang muon san xuat: ");
+            String find = sc.nextLine();
             for (int i = 0; i < dssp.size(); i++) {
-                if (dssp.get(i).getHang().equalsIgnoreCase("Nokia")) {
+                if (dssp.get(i).getHang().equalsIgnoreCase(find)) {
                     dssp.get(i).xuatSP();
                 }
             }

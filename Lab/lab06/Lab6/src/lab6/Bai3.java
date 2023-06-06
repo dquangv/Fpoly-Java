@@ -8,7 +8,7 @@ public class Bai3 {
     public static class SinhVien {
 
         Scanner sc = new Scanner(System.in);
-        private String hoTen, email, sdt, cmnd;
+        private String hoTen, email, sdt, cccd;
 
         public String getHoTen() {
             return hoTen;
@@ -34,12 +34,12 @@ public class Bai3 {
             this.sdt = sdt;
         }
 
-        public String getCmnd() {
-            return cmnd;
+        public String getCccd() {
+            return cccd;
         }
 
-        public void setCmnd(String cmnd) {
-            this.cmnd = cmnd;
+        public void setCccd(String cccd) {
+            this.cccd = cccd;
         }
 
         public void nhapDS() {
@@ -50,10 +50,10 @@ public class Bai3 {
                 System.out.print("Email: ");
                 email = sc.nextLine();
 
-                if (email.matches("\\w+@\\w+\\.\\w+")) {
+                if (email.matches("\\w+@fpt.edu.vn")) {
                     break;
                 } else {
-                    System.out.println("Nhap dung kieu email dum cai!");
+                    System.out.println("Nhap dung kieu email fpt dum cai ma!");
                 }
 
             }
@@ -62,18 +62,18 @@ public class Bai3 {
                 System.out.print("So dien thoai: ");
                 sdt = sc.nextLine();
 
-                if (sdt.matches("\\d{10}")) {
+                if (sdt.matches("0\\d{9}")) {
                     break;
                 } else {
-                    System.out.println("Nhap du 10 so dum cai ma!");
+                    System.out.println("Nhap dung sdt dum cai ma!");
                 }
             }
 
             while (true) {
-                System.out.print("Chung minh nhan dan: ");
-                cmnd = sc.nextLine();
+                System.out.print("Can cuoc cong dan: ");
+                cccd = sc.nextLine();
 
-                if (cmnd.matches("\\w{12}")) {
+                if (cccd.matches("\\w{12}")) {
                     break;
                 } else {
                     System.out.println("Nhap du 12 so dum cai ma!");
@@ -82,10 +82,10 @@ public class Bai3 {
         }
 
         public void xuatDS() {
-            System.out.println("\nHo ten: " + hoTen);
-            System.out.println("Email: " + email);
-            System.out.println("So dien thoai: " + sdt);
-            System.out.println("Chung minh nhan dan: " + cmnd);
+            System.out.println("\nHo ten: " + getHoTen());
+            System.out.println("Email: " + getEmail());
+            System.out.println("So dien thoai: " + getSdt());
+            System.out.println("Can cuoc cong dan: " + getCccd());
         }
 
         public void dsSV() {
