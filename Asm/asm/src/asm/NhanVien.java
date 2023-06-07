@@ -196,18 +196,16 @@ public class NhanVien implements Comparator<NhanVien> {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Nhap khoang luong ma ban muon tim: ");
-        BigDecimal khoangLuong = new BigDecimal(sc.nextLine());
+        String khoangLuong = sc.nextLine();
 
-        String[] mocLuong = khoangLuong.toString().split("\\.");
-        
-        System.out.println(mocLuong[0]);
-        System.out.println(mocLuong[1]);
+        String[] mocLuong = khoangLuong.split(" ");
+
         ArrayList<NhanVien> nvLuong = new ArrayList<>();
 
         int check = 0;
 
         for (int i = 0; i < dsNV.size(); i++) {
-            if (dsNV.get(i).getThuNhap().compareTo(new BigDecimal(mocLuong[0].trim())) >= 0 && dsNV.get(i).getThuNhap().compareTo(new BigDecimal(mocLuong[1].trim())) <= 0) {
+            if (dsNV.get(i).getThuNhap().compareTo(new BigDecimal(mocLuong[0])) >= 0 && dsNV.get(i).getThuNhap().compareTo(new BigDecimal(mocLuong[1])) <= 0) {
                 nvLuong.add(dsNV.get(i));
                 check++;
             }
@@ -216,6 +214,7 @@ public class NhanVien implements Comparator<NhanVien> {
         if (check == 0) {
             System.out.printf("Khong co nhan vien nao co muc luong trong khoang %s den %s", mocLuong[0], mocLuong[1]);
         } else {
+            System.out.printf("Danh sach nhan vien co luong trong khoang %s den %s\n", mocLuong[0], mocLuong[1]);
             for (NhanVien nv : nvLuong) {
                 System.out.println("\nMa nhan vien: " + nv.getMaNV());
                 System.out.println("Ho ten: " + nv.getHoTen());
@@ -249,7 +248,12 @@ public class NhanVien implements Comparator<NhanVien> {
     }
 
     public static void topLuong(ArrayList<NhanVien> dsNV) {
-        sapXepLuong(dsNV);
+        Collections.sort(dsNV, new Comparator<NhanVien>() {
+            @Override
+            public int compare(NhanVien o1, NhanVien o2) {
+                return o1.getThuNhap().compareTo(o2.getThuNhap());
+            }
+        });
         Collections.reverse(dsNV);
         for (int i = 0; i < 5; i++) {
             System.out.println("\nMa nhan vien: " + dsNV.get(i).getMaNV());
