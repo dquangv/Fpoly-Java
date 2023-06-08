@@ -11,6 +11,13 @@ public class NhanVien implements Comparator<NhanVien> {
     Scanner sc = new Scanner(System.in);
     public String maNV, hoTen;
     public BigDecimal luong;
+    
+    public NhanVien() {
+    }
+    
+    public NhanVien(String maNV, String hoTen, BigDecimal luong) {
+        
+    }
 
     public BigDecimal getThueTN() {
         BigDecimal thueTN;
@@ -144,7 +151,6 @@ public class NhanVien implements Comparator<NhanVien> {
             }
         }
 
-        // Remove the employees from the delete list
         dsNV.removeAll(dsXoa);
 
         System.out.println("Danh sach sau khi xoa");
