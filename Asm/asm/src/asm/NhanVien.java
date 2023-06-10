@@ -9,15 +9,28 @@ import java.util.Scanner;
 public class NhanVien implements Comparator<NhanVien> {
 
     Scanner sc = new Scanner(System.in);
-    public String maNV, hoTen;
+
+    public String maNV, hoTen, viTri;
     public BigDecimal luong;
-    
+
     public NhanVien() {
+    };
+
+    public NhanVien(String maNV, String hoTen, String viTri, BigDecimal luong) {
+        this.maNV = maNV;
+        this.hoTen = hoTen;
+        this.viTri = viTri;
+        this.luong = luong;
+    }
+
+    public BigDecimal getLuong() {
+        return luong;
+    }
+
+    public void setLuong(BigDecimal luong) {
+        this.luong = luong;
     }
     
-    public NhanVien(String maNV, String hoTen, BigDecimal luong) {
-        
-    }
 
     public BigDecimal getThueTN() {
         BigDecimal thueTN;
@@ -51,58 +64,31 @@ public class NhanVien implements Comparator<NhanVien> {
         this.hoTen = hoTen;
     }
 
+    public String getviTri() {
+        return viTri;
+    }
+
+    public void setviTri(String viTri) {
+        this.viTri = viTri;
+    }
+
     public BigDecimal getThuNhap() {
-        return luong;
+        return getLuong();
     }
 
-    public void setThuNhap(BigDecimal luong) {
-        this.luong = luong;
-    }
 
-    public static void menu() {
-        System.out.println("*-------------------------------------------------------------------------------*");
-        System.out.println("*\t\t\t\t\tMENU\t\t\t\t\t*");
-        System.out.println("*\t 1. \tNhap danh sach nhan vien tu ban phim\t\t\t\t*");
-        System.out.println("*\t 2. \tXuat danh sach nhan vien ra ban phim\t\t\t\t*");
-        System.out.println("*\t 3. \tTim va hien thi nhan vien theo ma nhap tu ban phim\t\t*");
-        System.out.println("*\t 4. \tXoa nhan vien theo ma nhap tu ban phim\t\t\t\t*");
-        System.out.println("*\t 5. \tCap nhat thong tin nhan vien theo ma nhap tu ban phim\t\t*");
-        System.out.println("*\t 6. \tTim cac nhan vien theo khoang luong nhap tu ban phim\t\t*");
-        System.out.println("*\t 7. \tSap xep nhan vien theo ho va ten\t\t\t\t*");
-        System.out.println("*\t 8. \tSap xep nhan vien theo thu nhap\t\t\t\t\t*");
-        System.out.println("*\t 9. \tXuat 5 nhan vien co thu nhap cao nhat\t\t\t\t*");
-        System.out.println("*\t 10. \tKet thuc chuong trinh\t\t\t\t\t\t*");
-        System.out.println("*-------------------------------------------------------------------------------*");
-    }
-
-    public static void nhapThongTin(ArrayList<NhanVien> dsNV) {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            NhanVien nhanVien = new NhanVien();
-
-            System.out.print("Ma nhan vien: ");
-            nhanVien.setMaNV(sc.nextLine());
-            System.out.print("Ho ten: ");
-            nhanVien.setHoTen(sc.nextLine());
-            System.out.print("Thu nhap: ");
-            nhanVien.setThuNhap(new BigDecimal(sc.nextLine()));
-
-            dsNV.add(nhanVien);
-
-            System.out.print("Nhap nua hong? (Y/N): ");
-            String check = sc.nextLine();
-            if (check.equalsIgnoreCase("No") || check.equalsIgnoreCase("N")) {
-                break;
-            }
-        }
-    }
+    public void nhapThongTin(NhanVien nvHC) {
+            System.out.println("Luong co ban: ");
+            nvHC.setLuong(new BigDecimal(sc.nextLine()));
+    };
 
     public static void xuatThongTin(ArrayList<NhanVien> dsNV) {
 
         for (int i = 0; i < dsNV.size(); i++) {
             System.out.println("\nMa nhan vien: " + dsNV.get(i).getMaNV());
             System.out.println("Ho ten: " + dsNV.get(i).getHoTen());
-            System.out.println("Luong: " + dsNV.get(i).getThuNhap());
+            System.out.println("Vi tri: Hanh chinh");
+            System.out.println("Luong co ban: " + dsNV.get(i).getThuNhap());
             System.out.println("Thue thu nhap: " + dsNV.get(i).getThueTN());
         }
     }
@@ -329,5 +315,4 @@ public class NhanVien implements Comparator<NhanVien> {
             }
         } while (true);
     }
-
 }
