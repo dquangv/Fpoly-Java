@@ -35,7 +35,7 @@ public class Bai2 {
         }
 
         public void xuat() {
-            System.out.println("Ho ten: " + hoTen);
+            System.out.println("\nHo ten: " + hoTen);
             System.out.println("Nganh: " + nganh);
             System.out.println("Diem: " + getDiem());
             System.out.println("Hoc luc: " + getHocLuc());
@@ -132,5 +132,7 @@ public class Bai2 {
             }
         };
         svPoly.dsSV();
+        
+        
     }
 }

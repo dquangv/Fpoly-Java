@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 import lab7.Bai2.SinhVienPoly;
+import lab7.Bai3.SinhVienIT;
 import lab7.Bai3.dssv;
 
 public class Bai4 extends dssv {
@@ -31,8 +32,9 @@ public class Bai4 extends dssv {
         System.out.println("2. Xuat thong tin danh sach sinh vien");
         System.out.println("3. Xuat danh sach sinh vien co hoc luc gioi");
         System.out.println("4. Sap xep danh sach sinh vien theo diem");
-        System.out.println("5. Ket thuc");
-        System.out.print("Ban muon (1-5): ");
+        System.out.println("5. Xuat danh sach sinh vien theo nganh hoc");
+        System.out.println("6. Ket thuc");
+        System.out.print("Ban muon (1-6): ");
     }
     
     public void locSV() {
@@ -45,6 +47,34 @@ public class Bai4 extends dssv {
     
     public void sapXepSV() {
         Collections.sort(dssv, new CompareDiem());
+        for (int i = 0; i < dssv.size(); i++) {
+            dssv.get(i).xuat();
+        }
+    }
+    
+    public void xuatDSSVNganh() {
+        
+        ArrayList<SinhVienPoly> dsSVIT = new ArrayList<>();
+        ArrayList<SinhVienPoly> dsSVBIZ = new ArrayList<>();
+        
+        for (int i = 0 ; i < dssv.size(); i++) {
+            boolean check = dssv.get(i) instanceof SinhVienIT;
+            if (check) {
+                dsSVIT.add(dssv.get(i));
+            } else {
+                dsSVBIZ.add(dssv.get(i));
+            }
+        }
+        
+        System.out.println("\nDanh sach sinh vien IT");
+        for (int i =0; i <dsSVIT.size();i++) {
+            dsSVIT.get(i).xuat();
+        }
+        
+        System.out.println("\nDanh sach sinh vien Biz");
+        for (int i=0; i <dsSVBIZ.size();i++) {
+            dsSVBIZ.get(i).xuat();
+        }
     }
 
     public static void main(String[] args) {
@@ -67,6 +97,9 @@ public class Bai4 extends dssv {
                     dssv.sapXepSV();
                     break;
                 case 5:
+                    dssv.xuatDSSVNganh();
+                    break;
+                case 6:
                     System.out.println("Cam on da su dung dich vu");
                     System.exit(0);
                 default:

@@ -10,6 +10,13 @@ public class Bai3 {
 
         public double java, html, css;
 
+        public SinhVienIT(double java, double html, double css, String hoTen, String nganh) {
+            super(hoTen, nganh);
+            this.java = java;
+            this.html = html;
+            this.css = css;
+        }
+
         public SinhVienIT(String hoTen, String nganh) {
             super(hoTen, nganh);
         }
@@ -75,7 +82,10 @@ public class Bai3 {
                     sv.nhapdiem();
                     sv.getDiem();
                     dssv.add(sv);
+                } else {
+                    System.out.println("Truong nay chi co chuyen nganh IT va Marketing");
                 }
+                
                 System.out.print("Nhap nua hong? (Y/N): ");
                 String check = sc.nextLine();
                 if (check.equalsIgnoreCase("No") || check.equalsIgnoreCase("N")) {
