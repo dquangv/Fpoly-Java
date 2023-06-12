@@ -10,9 +10,9 @@ public class NhanVien implements Comparator<NhanVien> {
 
     Scanner sc = new Scanner(System.in);
 
-    QuanLyNhanVien qlNV = new QuanLyNhanVien();
-
     public String maNV, hoTen, viTri;
+
+    //kieu du lieu lon va chinh xac hon double, tuy nhien cach goi va xu ly khac voi kieu thong thuong
     public BigDecimal luong;
 
     public NhanVien() {
@@ -38,12 +38,12 @@ public class NhanVien implements Comparator<NhanVien> {
         BigDecimal luong9000000 = new BigDecimal("9000000");
         BigDecimal luong15000000 = new BigDecimal("15000000");
 
-        if (luong.compareTo(luong9000000) < 0) {
+        if (getThuNhap().compareTo(luong9000000) < 0) {
             thueTN = BigDecimal.ZERO;
-        } else if (luong.compareTo(luong15000000) <= 0) {
-            thueTN = luong.multiply(new BigDecimal("0.1"));
+        } else if (getThuNhap().compareTo(luong15000000) <= 0) {
+            thueTN = getThuNhap().multiply(new BigDecimal("0.1"));
         } else {
-            thueTN = luong.multiply(new BigDecimal("0.12"));
+            thueTN = getThuNhap().multiply(new BigDecimal("0.12"));
         }
 
         return thueTN;
@@ -80,11 +80,13 @@ public class NhanVien implements Comparator<NhanVien> {
     public void xuatThongTin() {
         System.out.println("\nMa nhan vien: " + getMaNV());
         System.out.println("Ho ten: " + getHoTen());
-        System.out.println("Vi tri: Hanh chinh");
+        System.out.println("Vi tri: " + getviTri());
         System.out.println("Luong co ban: " + getLuong());
+        System.out.println("Thu nhap: " + getThuNhap());
         System.out.println("Thue thu nhap: " + getThueTN());
     }
 
+    //so sanh doi tuong theo thu tu bang chu cai tang dan
     @Override
     public int compare(NhanVien o1, NhanVien o2) {
         return o1.getHoTen().compareTo(o2.getHoTen());

@@ -35,16 +35,17 @@ public class TiepThi extends NhanVien {
     }
 
     public BigDecimal getThuNhap() {
-        return super.getThuNhap().add(new BigDecimal(getDoanhSo()).multiply(BigDecimal.valueOf(getHueHong())));
+        return super.getLuong().add(new BigDecimal(getDoanhSo()).multiply(BigDecimal.valueOf(getHueHong())));
     }
 
     public void xuatThongTin() {
         System.out.println("\nMa nhan vien: " + getMaNV());
         System.out.println("Ho ten: " + getHoTen());
-        System.out.println("Vi tri: Hanh chinh");
+        System.out.println("Vi tri: " + getviTri());
         System.out.println("Luong co ban: " + getLuong());
         System.out.println("Doanh so ban bang: " + getDoanhSo());
         System.out.println("Phan tram hue hong: " + getHueHong());
+        System.out.println("Thu nhap: " + getThuNhap());
         System.out.println("Thue thu nhap: " + getThueTN());
     }
 }

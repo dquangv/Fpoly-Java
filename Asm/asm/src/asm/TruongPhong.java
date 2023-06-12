@@ -23,12 +23,17 @@ public class TruongPhong extends NhanVien {
         this.trachNhiem = trachNhiem;
     }
 
+    public BigDecimal getThuNhap() {
+        return super.getLuong().add((getTrachNhiem()));
+    }
+
     public void xuatThongTin() {
         System.out.println("\nMa nhan vien: " + getMaNV());
         System.out.println("Ho ten: " + getHoTen());
-        System.out.println("Vi tri: Hanh chinh");
+        System.out.println("Vi tri: " + getviTri());
         System.out.println("Luong co ban: " + getLuong());
         System.out.println("Luong trach nhiem: " + getTrachNhiem());
+        System.out.println("Thu nhap: " + getThuNhap());
         System.out.println("Thue thu nhap: " + getThueTN());
     }
 }
