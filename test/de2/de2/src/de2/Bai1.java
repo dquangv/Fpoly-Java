@@ -3,6 +3,7 @@ package de2;
 public class Bai1 {
 
     public static class SinhVien {
+
         private int MSSV, NamSinh;
         private String TenSV;
         private double Diem;
@@ -13,9 +14,9 @@ public class Bai1 {
             this.TenSV = TenSV;
             this.Diem = Diem;
         }
-        
+
         public SinhVien() {
-            
+
         }
 
         public int getMSSV() {
@@ -49,13 +50,13 @@ public class Bai1 {
         public void setDiem(double Diem) {
             this.Diem = Diem;
         }
-        
+
         public void inThongTin() {
-            System.out.println("Ten sinh vien: " +getTenSV());
-            System.out.println("Ma sinh vien: " +getMSSV());
-            System.out.println("Nam sinh: "+getNamSinh());
-            System.out.println("Diem: "+getDiem());
+            System.out.println("Ten sinh vien: " + getTenSV());
+            System.out.println("Ma sinh vien: " + getMSSV());
+            System.out.println("Nam sinh: " + getNamSinh());
+            System.out.println("Diem: " + getDiem());
         }
     }
-    
+
 }

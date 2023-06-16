@@ -7,13 +7,14 @@ public class Bai3 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Bai2 ds = new Bai2();
-        
+
         while (true) {
             System.out.println("MENU");
             System.out.println("1.Nhap 1 doi tuong hoac danh sach doi tuong");
             System.out.println("2.Xuat 1 doi tuong hoac danh sach doi tuong");
             System.out.println("3.Xuat danh sach cac sinh vien qua mon");
             System.out.println("4.Tim sinh vien theo ma");
+            System.out.println("5.Nhap va xuat thong tin sinh vien nganh UDPM");
             System.out.println("0.Thoat");
 
             System.out.println("Chon so: ");
@@ -35,6 +36,10 @@ public class Bai3 {
                 case 4:
                     System.out.println("TIM SINH VIEN THEO MA");
                     ds.timSV();
+                    break;
+                case 5:
+                    System.out.println("NHAP VA XUAT THONG TIN SINH VIEN NGANH UDPM");
+                    ds.svUDPM();
                     break;
                 case 0:
                     System.out.println("Cam on da su dung chuong trinh");
